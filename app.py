@@ -60,8 +60,7 @@ import matplotlib.pyplot as plt
 st.title("🧮 Calculadora y Visualización de Figuras Geométricas")
 
 # Selección de figura
-figura = st.selectbox(
-    "Selecciona una figura geométrica:", ("Círculo", "Triángulo", "Rectángulo", "Cuadrado"))
+figura = st.selectbox("Selecciona una figura geométrica:", ("Círculo", "Triángulo", "Rectángulo", "Cuadrado"))
 
 # Selección de color
 color = st.color_picker("Elige el color para la figura", "#00f900")
