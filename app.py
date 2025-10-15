@@ -1,5 +1,5 @@
 import streamlit as st
-st.title("Mi aplicacion para calcular el area y perímetro de figuras geométricas")
+st.title("Mi aplicacion para calcular el area y perímetro de figuras geométricas🧮")
 st.sidebar.write("Nombre: Octavio Hiram Juárez Lozoya") 
 st.sidebar.write("Matrícula: 385858") 
 import math
@@ -116,3 +116,81 @@ st.pyplot(fig)
 
 ### Parte 3
 import numpy as np
+
+st.set_page_config(page_title="Geometría y Trigonometría")
+
+tab1, tab2, tab3 = st.tabs(["📐 Geometría", "🖼️ Visualización", "📈 Trigonometría"])
+
+with tab1:
+    st.title("Cálculo de Área y Perímetro")
+    fig = st.selectbox("Figura:", ["Círculo", "Triángulo", "Rectángulo", "Cuadrado"])
+    A = P = 0
+
+    if fig == "Círculo":
+        r = st.slider("Radio", 0.1, 100.0, 10.0)
+        A, P = math.pi * r**2, 2 * math.pi * r
+
+    elif fig == "Triángulo":
+        b = st.number_input("Base", 0.1, key="bt")
+        h = st.number_input("Altura", 0.1, key="ht")
+        a = st.number_input("Lado a", 0.1, key="at")
+        c = st.number_input("Lado c", 0.1, key="ct")
+        A, P = 0.5 * b * h, a + b + c
+
+    elif fig == "Rectángulo":
+        b = st.number_input("Base", 0.1, key="br")
+        h = st.number_input("Altura", 0.1, key="hr")
+        A, P = b * h, 2 * (b + h)
+
+    elif fig == "Cuadrado":
+        l = st.number_input("Lado", 0.1)
+        A, P = l**2, 4 * l
+
+    st.metric("Área", f"{A:.2f}")
+    st.metric("Perímetro", f"{P:.2f}")
+    
+with tab2:
+    st.title("Visualización de la Figura")
+    color = st.color_picker("Color", "#00f900")
+    fig_, ax = plt.subplots()
+    ax.set_aspect("equal")
+    ax.axis("off")
+
+    if fig == "Círculo":
+        ax.add_artist(plt.Circle((0, 0), r, color=color, fill=False))
+        ax.set(xlim=(-r*1.2, r*1.2), ylim=(-r*1.2, r*1.2))
+
+    elif fig == "Triángulo":
+        ax.add_patch(plt.Polygon([[0, 0], [b, 0], [0, h]], color=color, fill=False))
+        ax.set(xlim=(-1, b+1), ylim=(-1, h+1))
+
+    elif fig == "Rectángulo":
+        ax.add_patch(plt.Rectangle((0, 0), b, h, color=color, fill=False))
+        ax.set(xlim=(-1, b+1), ylim=(-1, h+1))
+
+    elif fig == "Cuadrado":
+        ax.add_patch(plt.Rectangle((0, 0), l, l, color=color, fill=False))
+        ax.set(xlim=(-1, l+1), ylim=(-1, l+1))
+
+    st.pyplot(fig_)
+
+with tab3:
+    st.title("Funciones Trigonométricas")
+    rmax = st.slider("Rango (x)", math.pi, 10 * math.pi, 2 * math.pi)
+    amp = st.slider("Amplitud", 0.1, 5.0, 1.0)
+    x = np.linspace(0, rmax, 500)
+
+    y_sin = amp * np.sin(x)
+    y_cos = amp * np.cos(x)
+    y_tan = amp * np.tan(x)
+    y_tan[np.abs(y_tan) > 10] = np.nan  # Evitar saltos
+
+    fig3, ax3 = plt.subplots()
+    ax3.plot(x, y_sin, label="sin(x)")
+    ax3.plot(x, y_cos, label="cos(x)")
+    ax3.plot(x, y_tan, label="tan(x)")
+    ax3.set_title("Trigonometría")
+    ax3.grid(True)
+    ax3.legend()
+
+    st.pyplot(fig3)
