@@ -12,7 +12,7 @@ area = math.pi * radio**2
 st.write(f"El area del circulo con radio {radio} es: {area: .2f}")
 
 ### Parte 1
-
+st.title("Cálculo de area y perímetro de figuras geométricas")
 # 1. Selección de la figura
 figura = st.selectbox("Selecciona una figura geométrica:", ("Círculo", "Triángulo", "Rectángulo", "Cuadrado"))
 # Variables para área y perímetro
@@ -113,3 +113,4 @@ st.metric("Perímetro", f"{perimetro:.2f}")
 st.pyplot(fig)
 
 ### Parte 3
+import numpy as np
