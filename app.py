@@ -119,9 +119,9 @@ import numpy as np
 
 st.set_page_config(page_title="Geometría y Trigonometría")
 
-tab3 = st.tabs(["📈 Trigonometría"])
+tab = st.tabs(["📈 Trigonometría"])
 
-with tab3:
+with tab:
     st.title("Funciones Trigonométricas")
     rmax = st.slider("Rango (x)", math.pi, 10 * math.pi, 2 * math.pi)
     amp = st.slider("Amplitud", 0.1, 5.0, 1.0)
