@@ -116,28 +116,33 @@ st.pyplot(fig)
 
 ### Parte 3
 import numpy as np
+import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
+import math
 
 st.set_page_config(page_title="Trigonometría")
 
-tab = st.tabs(["📈 Trigonometría"])
+st.title("📈 Funciones Trigonométricas")
 
-with tab:
-    st.title("Funciones Trigonométricas")
-    rmax = st.slider("Rango (x)", math.pi, 10 * math.pi, 2 * math.pi)
-    amp = st.slider("Amplitud", 0.1, 5.0, 1.0)
-    x = np.linspace(0, rmax, 500)
+# Controles
+rango = st.slider("Rango (x)", math.pi, 10 * math.pi, 2 * math.pi)
+amplitud = st.slider("Amplitud", 0.1, 5.0, 1.0)
 
-    y_sin = amp * np.sin(x)
-    y_cos = amp * np.cos(x)
-    y_tan = amp * np.tan(x)
-    y_tan[np.abs(y_tan) > 10] = np.nan  # Evitar saltos
+# Datos
+x = np.linspace(0, rango, 500)
+y_sin = amplitud * np.sin(x)
+y_cos = amplitud * np.cos(x)
+y_tan = amplitud * np.tan(x)
+y_tan[np.abs(y_tan) > 10] = np.nan  # evitar saltos grandes
 
-    fig3, ax3 = plt.subplots()
-    ax3.plot(x, y_sin, label="sin(x)")
-    ax3.plot(x, y_cos, label="cos(x)")
-    ax3.plot(x, y_tan, label="tan(x)")
-    ax3.set_title("Trigonometría")
-    ax3.grid(True)
-    ax3.legend()
+# Gráfica
+fig, ax = plt.subplots()
+ax.plot(x, y_sin, label="sin(x)")
+ax.plot(x, y_cos, label="cos(x)")
+ax.plot(x, y_tan, label="tan(x)")
+ax.set_title("Funciones Trigonométricas")
+ax.grid(True)
+ax.legend()
 
-    st.pyplot(fig3)
+st.pyplot(fig)
