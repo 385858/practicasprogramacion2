@@ -119,7 +119,7 @@ import numpy as np
 
 st.set_page_config(page_title="Trigonometría")
 
-tab = st.tab(["📈 Trigonometría"])
+tab = st.tabs(["📈 Trigonometría"])
 
 with tab:
     st.title("Funciones Trigonométricas")
