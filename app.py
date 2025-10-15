@@ -1,6 +1,7 @@
 import streamlit as st
 st.title("Mi aplicacion para calcular el area y perímetro de figuras geométricas")
 st.sidebar.write("Nombre: Octavio Hiram Juárez Lozoya") 
+st.sidebar.write("Matrícula: 385858") 
 import math
 # Widget para ingresar el radio
 st.title("Cálculo de área de un círculo")
