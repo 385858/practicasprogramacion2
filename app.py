@@ -9,3 +9,7 @@ area = math.pi * radio**2
 
 # Mostrar resultado
 st.write(f"El area del circulo con radio {radio} es: {area: .2f}")
+
+# Widget para ingresar base y altura
+base= st.slider("Selecciona la base", 0.0, 10.0, 5.0)
+altura= st.slider("Selecciona la altura", 0.0, 10.0, 5.0)
