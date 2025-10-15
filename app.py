@@ -112,3 +112,4 @@ st.metric("Área", f"{area:.2f}")
 st.metric("Perímetro", f"{perimetro:.2f}")
 st.pyplot(fig)
 
+### Parte 3
