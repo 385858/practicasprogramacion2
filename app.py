@@ -117,9 +117,9 @@ st.pyplot(fig)
 ### Parte 3
 import numpy as np
 
-st.set_page_config(page_title="Geometría y Trigonometría")
+st.set_page_config(page_title="Trigonometría")
 
-tab = st.tabs(["📈 Trigonometría"])
+tab = st.tab(["📈 Trigonometría"])
 
 with tab:
     st.title("Funciones Trigonométricas")
