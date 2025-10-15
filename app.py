@@ -57,79 +57,58 @@ if area is not None and perimetro is not None:
 
 ### Parte 2
 import matplotlib.pyplot as plt
-st.title("🧮 Calculadora y Visualización de Figuras Geométricas")
+import streamlit as st
+import math
+import matplotlib.pyplot as plt
 
+st.title("🧮 Calculadora de Área, Perímetro y Visualización")
 
-# Selección de color
-color = st.color_picker("Elige el color para la figura", "#00f900")
+figura = st.selectbox("Selecciona una figura:", ("Círculo", "Triángulo", "Rectángulo", "Cuadrado"))
+color = st.color_picker("Elige un color para la figura", "#00f900")
 
-# Variables para cálculo
-area = None
-perimetro = None
-
-# Matplotlib: preparar figura
+area = perimetro = 0
 fig, ax = plt.subplots()
+ax.set_aspect("equal")
+ax.axis("off")
 
-# Configurar aspecto del gráfico
-ax.set_aspect('equal')
-ax.axis('off')  # Ocultar ejes para que se vea limpio
-
-# Cálculos y visualización por figura
 if figura == "Círculo":
-    radio = st.slider("Selecciona el radio", 0.1, 100.0, 10.0)
-    area = math.pi * radio**2
-    perimetro = 2 * math.pi * radio
-
-    # Dibujar el círculo
-    circle = plt.Circle((0, 0), radio, color=color, fill=False, linewidth=2)
-    ax.add_artist(circle)
-    ax.set_xlim(-radio*1.2, radio*1.2)
-    ax.set_ylim(-radio*1.2, radio*1.2)
+    r = st.slider("Radio", 0.1, 100.0, 10.0, key="radio")
+    area = math.pi * r**2
+    perimetro = 2 * math.pi * r
+    ax.add_artist(plt.Circle((0, 0), r, color=color, fill=False, linewidth=2))
+    ax.set_xlim(-r*1.2, r*1.2)
+    ax.set_ylim(-r*1.2, r*1.2)
 
 elif figura == "Triángulo":
-    base = st.number_input("Ingresa la base", min_value=0.1)
-    altura = st.number_input("Ingresa la altura", min_value=0.1)
-    lado_a = st.number_input("Ingresa el lado a", min_value=0.1)
-    lado_b = st.number_input("Ingresa el lado b", min_value=0.1)
-    lado_c = st.number_input("Ingresa el lado c", min_value=0.1)
-    area = 0.5 * base * altura
-    perimetro = lado_a + lado_b + lado_c
-
-    # Dibujar triángulo rectángulo aproximado
-    triangle = plt.Polygon([[0, 0], [base, 0], [0, altura]], color=color, fill=False, linewidth=2)
-    ax.add_patch(triangle)
-    ax.set_xlim(-1, base + 1)
-    ax.set_ylim(-1, altura + 1)
+    b = st.number_input("Base", min_value=0.1, key="base_tri")
+    h = st.number_input("Altura", min_value=0.1, key="altura_tri")
+    a = st.number_input("Lado a", min_value=0.1, key="a_tri")
+    c = st.number_input("Lado c", min_value=0.1, key="c_tri")
+    area = 0.5 * b * h
+    perimetro = a + b + c
+    ax.add_patch(plt.Polygon([[0, 0], [b, 0], [0, h]], color=color, fill=False, linewidth=2))
+    ax.set_xlim(-1, b + 1)
+    ax.set_ylim(-1, h + 1)
 
 elif figura == "Rectángulo":
-    base = st.number_input("Ingresa la base", min_value=0.1)
-    altura = st.number_input("Ingresa la altura", min_value=0.1)
-    area = base * altura
-    perimetro = 2 * (base + altura)
-
-    # Dibujar rectángulo
-    rect = plt.Rectangle((0, 0), base, altura, color=color, fill=False, linewidth=2)
-    ax.add_patch(rect)
-    ax.set_xlim(-1, base + 1)
-    ax.set_ylim(-1, altura + 1)
+    b = st.number_input("Base", min_value=0.1, key="base_rect")
+    h = st.number_input("Altura", min_value=0.1, key="altura_rect")
+    area = b * h
+    perimetro = 2 * (b + h)
+    ax.add_patch(plt.Rectangle((0, 0), b, h, color=color, fill=False, linewidth=2))
+    ax.set_xlim(-1, b + 1)
+    ax.set_ylim(-1, h + 1)
 
 elif figura == "Cuadrado":
-    lado = st.number_input("Ingresa el lado", min_value=0.1)
-    area = lado**2
-    perimetro = 4 * lado
+    l = st.number_input("Lado", min_value=0.1, key="lado_cuad")
+    area = l**2
+    perimetro = 4 * l
+    ax.add_patch(plt.Rectangle((0, 0), l, l, color=color, fill=False, linewidth=2))
+    ax.set_xlim(-1, l + 1)
+    ax.set_ylim(-1, l + 1)
 
-    # Dibujar cuadrado
-    square = plt.Rectangle((0, 0), lado, lado, color=color, fill=False, linewidth=2)
-    ax.add_patch(square)
-    ax.set_xlim(-1, lado + 1)
-    ax.set_ylim(-1, lado + 1)
+# Mostrar resultados y figura
+st.metric("Área", f"{area:.2f}")
+st.metric("Perímetro", f"{perimetro:.2f}")
+st.pyplot(fig)
 
-# Mostrar resultados
-if area is not None and perimetro is not None:
-    st.success(f"📐 Área: {area:.2f}")
-    st.success(f"📏 Perímetro: {perimetro:.2f}")
-    st.metric(label="Área", value=f"{area:.2f}")
-    st.metric(label="Perímetro", value=f"{perimetro:.2f}")
-
-    # Mostrar visualización
-    st.pyplot(fig)
