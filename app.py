@@ -22,8 +22,7 @@ if figura == "Círculo":
     radio = st.slider("Selecciona el radio", 0.1, 100.0, 10.0)
     area = math.pi * radio**2
     perimetro = 2 * math.pi * radio
-    st.write(f"El area del circulo con radio {radio} es: {area: .2f}")
-    st.write(f"El perimetro de un circulo con radio {radio} es:")
+
 
 elif figura == "Triángulo":
     base = st.number_input("Ingresa la base", min_value=0.1)
