@@ -2,7 +2,7 @@ import streamlit as st
 st.title("Mi aplicacion para calcular el area figuras geométricas")
 import math
 # Widget para ingresar el radio
-st.subtitle("Cálculo de área de un círculo")
+st.title("Cálculo de área de un círculo")
 radio= st.slider("Selecciona el radio", 0.0, 10.0, 5.0)
 
 # Calculo del area
