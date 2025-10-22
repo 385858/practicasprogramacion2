@@ -146,3 +146,29 @@ ax.grid(True)
 ax.legend()
 
 st.pyplot(fig)
+# Título de la aplicación
+st.title("Calculadora del Teorema de Pitágoras")
+
+# Opciones para elegir el tipo de cálculo
+calculo = st.selectbox("¿Qué deseas calcular?", ["Hipotenusa", "Cateto"])
+
+if calculo == "Hipotenusa":
+    # Entrada para los catetos
+    cateto1 = st.number_input("Introduce el valor del primer cateto (a)", min_value=0.0)
+    cateto2 = st.number_input("Introduce el valor del segundo cateto (b)", min_value=0.0)
+
+    if st.button("Calcular Hipotenusa"):
+        hipotenusa = math.sqrt(cateto1**2 + cateto2**2)
+        st.write(f"La hipotenusa es: {hipotenusa:.2f}")
+
+elif calculo == "Cateto":
+    # Entrada para la hipotenusa y el cateto conocido
+    hipotenusa = st.number_input("Introduce el valor de la hipotenusa (c)", min_value=0.0)
+    cateto = st.number_input("Introduce el valor del cateto conocido", min_value=0.0)
+
+    if st.button("Calcular Cateto"):
+        if hipotenusa > cateto:
+            otro_cateto = math.sqrt(hipotenusa**2 - cateto**2)
+            st.write(f"El otro cateto es: {otro_cateto:.2f}")
+        else:
+            st.warning("La hipotenusa debe ser mayor que el cateto.")
